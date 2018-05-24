@@ -1,0 +1,88 @@
+<!--
+  Generated template for the JouerPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>jouer</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-grid>
+		<ion-row>
+			<ion-col col-3>
+				<strong>Score</strong> {{score}}
+			</ion-col>
+			<ion-col col-3 offset-3>
+				{{vie}}
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+        {{currentQuiz.label}}
+			</ion-col>
+		</ion-row>
+    <ion-row [hidden]="anwserTrue">
+      <ion-row>
+        <ion-col>
+          <img src="assets/imgs/vrai.jpg" alt="">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p>{{currentQuiz.description}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+    <ion-row [hidden]="anwserFalse">
+      <ion-row>
+        <ion-col>
+          <img src="assets/imgs/faux.jpg" alt="">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p>{{currentQuiz.description}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+	</ion-grid>
+   <ion-grid [hidden]="endQuiz">
+    score
+  </ion-grid>
+  <ion-footer [hidden]="toolbarQuiz">
+    <ion-toolbar>
+      <ion-grid>
+        <ion-row justify-content-between>
+          <ion-col col-4><button ion-button full color="secondary" (click)="checkAnwser(true)">Vrai</button></ion-col>
+          <ion-col col-4 ><button ion-button full (click)="checkAnwser('joker')">Joker</button></ion-col>
+          <ion-col col-4><button ion-button full color="danger" (click)="checkAnwser(false)">Faux</button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
+  <ion-footer [hidden]="toolbarNext">
+    <ion-toolbar>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6><button ion-button full (click)="nextQuiz()">Suivant</button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
+  <ion-footer [hidden]="endQuiz">
+    <ion-toolbar>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6><button ion-button full>Score</button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>
