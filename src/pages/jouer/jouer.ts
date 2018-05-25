@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import { Question } from '../../model/Question';
 import { QuestionProvider } from '../../providers/question/question';
 /**
@@ -33,8 +33,11 @@ export class JouerPage {
   toolbarQuiz: boolean = false;
   toolbarNext: boolean = true;
   toolbarClassement: boolean = true;
+  jokerSection: boolean = true;
+  jokerItem1: boolean = false;
+  jokerItem2: boolean = false;
 
-  constructor(private questionProvider: QuestionProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private questionProvider: QuestionProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
     this.questions = this.questionProvider.getQuestions();
     // Initialise les questions au chargement de la page
     this.displayQuiz();
@@ -44,26 +47,23 @@ export class JouerPage {
   checkAnwser(anwser){
     if(this.endQuiz){
       if (anwser === 'joker'){
-        console.log('joker');
-        this.skipedQuiz.push(this.currentQuiz);
-        this.anwserFalse = false;
-        this.joker--;
+          console.log('joker');
+        this.showConfirm();
+          // Cache la section joker
+          // this.jokerSection = true;
       }else if(anwser === this.currentQuiz.anwser){
         console.log('bonne réponse');
         this.anwserTrue = false;
         this.score = this.score + this.step;
+        this.switchToolbar();
       }else{
         console.log('mauvaise réponse');
         this.anwserFalse = false;
         this.vie--;
+        this.switchToolbar();
       }
     }
     this.isEndQuiz();
-
-      // cache la toolbar vrai/faux
-      this.toolbarQuiz = true;
-      // affiche le bouton suivant
-      this.toolbarNext = false;
   }
   // Affiche une question
   displayQuiz(){
@@ -80,11 +80,15 @@ export class JouerPage {
   }
   // Affiche la question suivante
   nextQuiz(){
-      this.displayQuiz();
-      this.anwserTrue = true;
-      this.anwserFalse = true;
-      this.toolbarQuiz = false;
-      this.toolbarNext = true;
+    // Masque le message joker
+    if(!this.jokerSection){
+      this.jokerSection = true;
+    }
+    this.displayQuiz();
+    this.anwserTrue = true;
+    this.anwserFalse = true;
+    this.toolbarQuiz = false;
+    this.toolbarNext = true;
   }
   isEndQuiz(){
     if(this.questions.length == 0 || this.vie < 1) {
@@ -111,5 +115,42 @@ export class JouerPage {
   }
   goClassement(){
     console.log('classement');
+  }
+  showConfirm() {
+    let confirm = this.alertCtrl.create({
+      message: 'Passer cette question ?',
+      buttons: [
+        {
+          text: 'Non',
+          handler: () => {
+            console.log('Non');
+          }
+        },
+        {
+          text: 'Oui',
+          handler: () => {
+            console.log('Oui');
+            this.skipedQuiz.push(this.currentQuiz);
+            this.anwserFalse = false;
+            this.joker--;
+            // Masque un joker
+            if(this.jokerItem1 ==  false){
+              this.jokerItem1 = true;
+            }else if(this.jokerItem2 ==  false){
+              this.jokerItem2 = true;
+            }
+            this.jokerSection = false;
+            this.switchToolbar();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+  switchToolbar(){
+    // cache la toolbar vrai/faux
+    this.toolbarQuiz = true;
+    // affiche le bouton suivant
+    this.toolbarNext = false;
   }
 }
