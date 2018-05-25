@@ -17,15 +17,12 @@ const QUESTIONS = [
 
 @Injectable()
 export class QuestionProvider {
+  private questions: any = [];
   constructor() {
     console.log('Hello QuestionProvider Provider');
   }
   getQuestions(){
-  	return QUESTIONS;
-  }
-  // Choisi une question au hasard
-  getFirstQuiz(){
-    const rand = Math.floor((Math.random() * QUESTIONS.length) + 0);
-    return QUESTIONS[rand];
+    this.questions = QUESTIONS;
+  	return this.questions.slice();
   }
 }
