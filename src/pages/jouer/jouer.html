@@ -86,8 +86,7 @@
       <ion-grid>
         <ion-row justify-content-between>
           <ion-col col-4><button ion-button full color="secondary" (click)="checkAnwser(true)">Vrai</button></ion-col>
-          <ion-col col-2 [hidden]="jokerItem1"><img src="assets/imgs/joker_dc.png" (click)="checkAnwser('joker')" ></ion-col>
-          <ion-col col-2 [hidden]="jokerItem2"><img src="assets/imgs/joker_dc.png" (click)="checkAnwser('joker')" ></ion-col>
+          <joker [(inputJoker)]="joker" (outChild)="checkAnwser('joker')"></joker>
           <ion-col col-4><button ion-button full color="danger" (click)="checkAnwser(false)">Faux</button></ion-col>
         </ion-row>
       </ion-grid>

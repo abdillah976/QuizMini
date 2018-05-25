@@ -12,11 +12,9 @@ import {Component, Input} from '@angular/core';
 })
 export class HeartComponent {
 @Input('inputHeart') nbHeart: number;
-  text: string;
 
   constructor() {
     console.log('Hello HeartComponent Component');
-    this.text = 'Hello World';
   }
 
   displayHeart(){

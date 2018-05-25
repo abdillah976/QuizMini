@@ -17,25 +17,25 @@ import { QuestionProvider } from '../../providers/question/question';
 })
 export class JouerPage {
 	score: number;
-  heart: number ;
-  joker: number ;
-	step: number ;
+  heart: number;
+  joker: number;
+	step: number;
 	questions: any;
   skipedQuiz: any;
   currentQuiz;
-  endQuiz: boolean ;// proprieté hidden
-  toolbarScore: boolean ;
-  finalScore: boolean ;
-  quitte: boolean ;
-  quizContent: boolean ;
-  anwserTrue: boolean ;
-  anwserFalse: boolean ;
-  toolbarQuiz: boolean ;
-  toolbarNext: boolean ;
-  toolbarClassement: boolean ;
-  jokerSection: boolean ;
-  jokerItem1: boolean ;
-  jokerItem2: boolean ;
+  endQuiz: boolean;// proprieté hidden
+  toolbarScore: boolean;
+  finalScore: boolean;
+  quitte: boolean;
+  quizContent: boolean;
+  anwserTrue: boolean;
+  anwserFalse: boolean;
+  toolbarQuiz: boolean;
+  toolbarNext: boolean;
+  toolbarClassement: boolean;
+  jokerSection: boolean;
+  jokerItem1: boolean;
+  jokerItem2: boolean;
 
   constructor(private questionProvider: QuestionProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
     // this.questions = this.questionProvider.getQuestions();
@@ -76,6 +76,7 @@ export class JouerPage {
     if(this.endQuiz){
       if (anwser === 'joker'){
           console.log('joker');
+          console.log(this.joker);
         this.showConfirm();
           // Cache la section joker
           // this.jokerSection = true;
@@ -177,17 +178,19 @@ export class JouerPage {
           text: 'Oui',
           handler: () => {
             console.log('Oui');
-            this.skipedQuiz.push(this.currentQuiz);
-            this.anwserFalse = false;
-            this.joker--;
-            // Masque un joker
-            if(this.jokerItem1 ==  false){
-              this.jokerItem1 = true;
-            }else if(this.jokerItem2 ==  false){
-              this.jokerItem2 = true;
+            if(this.joker) {
+              this.skipedQuiz.push(this.currentQuiz);
+              this.anwserFalse = false;
+              this.joker--;
+              // Masque un joker
+              // if(this.jokerItem1 ==  false){
+              //   this.jokerItem1 = true;
+              // }else if(this.jokerItem2 ==  false){
+              //   this.jokerItem2 = true;
+              // }
+              // this.jokerSection = false;
+              this.switchToolbar();
             }
-            this.jokerSection = false;
-            this.switchToolbar();
           }
         }
       ]
@@ -230,5 +233,9 @@ export class JouerPage {
     console.log("service question");
     console.log(this.questionProvider.getQuestions());
     console.log('/////// INIT ////////////');
+  }
+
+  test() {
+    console.log('test click sur enfant');
   }
 }

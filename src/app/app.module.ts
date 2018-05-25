@@ -10,13 +10,15 @@ import { JouerPage } from '../pages/jouer/jouer';
 
 import { QuestionProvider } from '../providers/question/question';
 import {HeartComponent} from "../components/heart/heart";
+import {JokerComponent} from "../components/joker/joker";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     JouerPage,
-    HeartComponent
+    HeartComponent,
+    JokerComponent
   ],
   imports: [
     BrowserModule,
