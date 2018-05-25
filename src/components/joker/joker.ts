@@ -1,6 +1,4 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {getErrorLogger} from "@angular/core/src/errors";
-
 @Component({
   selector: 'joker',
   templateUrl: 'joker.html'
