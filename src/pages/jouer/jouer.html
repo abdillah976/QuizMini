@@ -12,15 +12,16 @@
 
 </ion-header>
 
-
 <ion-content padding>
 	<ion-grid [hidden]="quizContent">
 		<ion-row>
 			<ion-col col-3>
 				<strong>Score</strong> {{score}}
 			</ion-col>
-			<ion-col col-3 offset-3>
-				{{vie}}
+			<ion-col col-7 offset-2>
+        <ion-row>
+          <heart col-12 [inputHeart]="heart"></heart>
+        </ion-row>
 			</ion-col>
 		</ion-row>
 		<ion-row>

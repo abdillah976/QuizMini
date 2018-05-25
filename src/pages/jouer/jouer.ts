@@ -17,7 +17,7 @@ import { QuestionProvider } from '../../providers/question/question';
 })
 export class JouerPage {
 	score: number;
-	vie: number ;
+  heart: number ;
   joker: number ;
 	step: number ;
 	questions: any;
@@ -46,7 +46,7 @@ export class JouerPage {
 
   init(){
     this.score = 0;
-    this.vie = 3;
+    this.heart = 3;
     this.joker = 2;
     this.step = 10;
     this.skipedQuiz = [];
@@ -87,7 +87,7 @@ export class JouerPage {
       }else{
         console.log('mauvaise réponse');
         this.anwserFalse = false;
-        this.vie--;
+        this.heart--;
         this.switchToolbar();
       }
     }
@@ -136,7 +136,7 @@ export class JouerPage {
     this.toolbarNext = true;
   }
   isEndQuiz(){
-    if(this.questions.length == 0 || this.vie < 1) {
+    if(this.questions.length == 0 || this.heart < 1) {
       console.log("endQuiz");
       this.endQuiz = false;
       this.toolbarScore = false;
@@ -206,7 +206,7 @@ export class JouerPage {
   log(){
     console.log('/////// INIT ////////////');
     console.log(this.score);
-    console.log(this.vie);
+    console.log(this.heart);
     console.log(this.joker);
     console.log(this.step);
     console.log('questions:');

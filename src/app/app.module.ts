@@ -9,12 +9,14 @@ import { HomePage } from '../pages/home/home';
 import { JouerPage } from '../pages/jouer/jouer';
 
 import { QuestionProvider } from '../providers/question/question';
+import {HeartComponent} from "../components/heart/heart";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    JouerPage
+    JouerPage,
+    HeartComponent
   ],
   imports: [
     BrowserModule,
