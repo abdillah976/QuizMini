@@ -24,20 +24,25 @@ export class JouerPage {
   skipedQuiz: Question[] = [];
   currentQuiz: Question;
   endQuiz: boolean = true;// proprieté hidden
+  toolbarScore: boolean = true;
+  finalScore: boolean = true;
   quitte: boolean = false;
+  quizContent: boolean = false;
   anwserTrue: boolean = true;
   anwserFalse: boolean = true;
   toolbarQuiz: boolean = false;
   toolbarNext: boolean = true;
+  toolbarClassement: boolean = true;
 
   constructor(private questionProvider: QuestionProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.questions = this.questionProvider.getQuestions();
-    // this.questions = this.randomize(this.questions);
     // Initialise les questions au chargement de la page
     this.displayQuiz();
   }
 
+  // Vérifie la réponse choisi
   checkAnwser(anwser){
+    if(this.endQuiz){
       if (anwser === 'joker'){
         console.log('joker');
         this.skipedQuiz.push(this.currentQuiz);
@@ -52,45 +57,59 @@ export class JouerPage {
         this.anwserFalse = false;
         this.vie--;
       }
+    }
+    this.isEndQuiz();
+
+      // cache la toolbar vrai/faux
       this.toolbarQuiz = true;
+      // affiche le bouton suivant
       this.toolbarNext = false;
   }
+  // Affiche une question
   displayQuiz(){
     let rand = Math.floor((Math.random() * this.questions.length) + 0);
-    if(this.questions.length) {
+    // if(this.questions.length) {
       console.log(this.questions);
       this.currentQuiz = this.questions[rand];
       delete this.questions[rand];
       this.questions = this.questions.filter(res => res != null);
       console.log(this.questions);
-    }else{
-      this.endQuiz = false;
-    }
+    // }else{
+    //   this.endQuiz = false;
+    // }
   }
   // Affiche la question suivante
   nextQuiz(){
-    if(this.isEndQuiz()){
-      // affichage de la page score
-      
-    }else {
       this.displayQuiz();
       this.anwserTrue = true;
       this.anwserFalse = true;
       this.toolbarQuiz = false;
       this.toolbarNext = true;
-    }
   }
   isEndQuiz(){
-    console.log("passage");
-    if(this.questions.length || this.vie < 1) {
-      this.endQuiz = true;
-      return false;
-    }else{
+    if(this.questions.length == 0 || this.vie < 1) {
+      console.log("endQuiz");
       this.endQuiz = false;
+      this.toolbarScore = false;
       return true;
+    }else{
+      console.log("continue");
+      this.endQuiz = true;
+      this.toolbarScore = true;
+      return false;
     }
   }
-  isJokerUsed(){
-    return false;
+  displayScore(){
+    // Affiche la div score
+    this.finalScore = false;
+    // Cache la section question
+    this.quizContent= true;
+    // Affiche la toolbar classement
+    this.toolbarClassement = false;
+    // Cache la toobarScore
+    this.toolbarScore = true;
+  }
+  goClassement(){
+    console.log('classement');
   }
 }
