@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Input, OnChanges, Output} from '@angular/core';
 @Component({
   selector: 'joker',
   templateUrl: 'joker.html'
@@ -36,9 +36,6 @@ export class JokerComponent implements OnInit, OnChanges{
     }
     this.cuerrentJokers = this.jokers.slice();
     this.jokers = [];
-    console.log('init jokersss');
-    console.log(this.jokers);
-    console.log(this.nbJoker);
   }
 
   callParent(){
@@ -48,7 +45,6 @@ export class JokerComponent implements OnInit, OnChanges{
 
   ngOnChanges(){
     this.init();
-    console.log('ng + ' + this.nbJoker);
   }
 
 }

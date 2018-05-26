@@ -1,0 +1,63 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>option</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            <button ion-button color="light">
+              Niveau
+            </button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <button ion-button color="light">
+              Theme
+            </button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <button ion-button color="light" (click)="recEff()">
+              Effets
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            <ion-row>
+              <ion-col>
+                <button ion-button (click)="showRadioLevel()">
+                  {{optionsGame.level}}
+                </button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <button ion-button (click)="showRadioTheme()">
+                  {{optionsGame.theme}}
+                </button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-toggle [(ngModel)]="optionsGame.effects" (ngModelChange)="updateEffetct()"></ion-toggle>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+	</ion-grid>
+</ion-content>

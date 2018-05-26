@@ -7,16 +7,19 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { JouerPage } from '../pages/jouer/jouer';
+import {OptionPage} from "../pages/option/option";
 
 import { QuestionProvider } from '../providers/question/question';
 import {HeartComponent} from "../components/heart/heart";
 import {JokerComponent} from "../components/joker/joker";
+import { OptionProvider } from '../providers/option/option';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     JouerPage,
+    OptionPage,
     HeartComponent,
     JokerComponent
   ],
@@ -28,13 +31,15 @@ import {JokerComponent} from "../components/joker/joker";
   entryComponents: [
     MyApp,
     HomePage,
-    JouerPage
+    JouerPage,
+    OptionPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    QuestionProvider
+    QuestionProvider,
+    OptionProvider
   ]
 })
 export class AppModule {}
